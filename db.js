@@ -9,7 +9,6 @@ var connection = mysql.createConnection({
 class DbWrapper{
     register(username, password){
         connection.connect();
-        console.log("INSERT INTO 'users'('email', 'password') VALUES ('"+username+"','"+password+"')");
         connection.query("INSERT INTO `users`(`email`, `password`) VALUES (\""+username+"\",\""+password+"\")");
         connection.end();
     }
