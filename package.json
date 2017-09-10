@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel": "babel --presets es2015 ./src --out-dir ./build",
-    "start": "nodemon ./build/build.js",
+    "start": "npm install && babel --presets es2015 ./src --out-dir ./build && nodemon ./build/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
