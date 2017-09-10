@@ -6,11 +6,13 @@ var connection = mysql.createConnection({
     database: 'tresor'
 });
 
-connection.connect();
+class DbWrapper{
+    register(username, password){
+        connection.connect();
+        console.log("INSERT INTO 'users'('email', 'password') VALUES ('"+username+"','"+password+"')");
+        connection.query("INSERT INTO `users`(`email`, `password`) VALUES (\""+username+"\",\""+password+"\")");
+        connection.end();
+    }
+}
 
-connection.query('SELECT * from users', function(error, results, fields){
-    if(error) throw error;
-    console.log('The result is: ', results[0]);
-});
-
-connection.end();
+module.exports = DbWrapper;
