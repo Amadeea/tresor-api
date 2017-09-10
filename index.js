@@ -17,5 +17,5 @@ app.post('/register', function(req,res){
 });
 
 app.listen(3000, function(){
-    console.log('Example');
+    console.log("Listening to port 3000");
 });
