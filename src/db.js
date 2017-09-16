@@ -1,4 +1,6 @@
 var mysql = require('mysql');
+var moment = require('moment');
+
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -19,20 +21,29 @@ class DbWrapper{
         connection.end();
     }
 
-    getTransaction(userId){
+    getTransaction(userId, callback){
         connection.connect();
-        var result = connection.query("SELECT * FROM `transactions` WHERE `user_id`="+userId);
-        console.log(result);
+        var result = connection.query("SELECT * FROM `transactions` WHERE `user_id`="+userId, function(error, result, fields){
+            if (error){
+                callback(error, null);
+            }
+            else {
+                callback(null, result);
+            }
+        });
         connection.end();
-        return result;
     }
 
-    addTransaction(transactionId){
-
+    addTransaction(data){
+        connection.connect();
+        connection.query("INSERT INTO `transactions`(`description`, `hashtag`, `amount`,`user_id`,`date`) VALUES (\""+data.description+"\",\""+data.hashtag+"\",\""+data.amount+"\",\""+data.user_id+"\",\""+data.date+"\")");
+        connection.end();
     }
 
     updateTransaction(transactionId){
-
+        connection.connect();
+        connection.query("");
+        connection.end();
     }
 }
 
