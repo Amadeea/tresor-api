@@ -18,11 +18,19 @@ app.post('/login', function(req, res){
 
 });
 
-app.get('/transaction', function(req, res){
-    var result = dbWrapper.getTransaction(req.param('user_id'));
-    res.send("Selesai");
-    // res.send(result);
-    // res.send(req.param('user_id'));
+app.get('/get-transaction', function(req, res){
+    dbWrapper.getTransaction(req.param('user_id'), function(error, data){
+        for (var i = 0; i < data.length; i++) {
+            var row = data[i];
+            console.log(row);
+}
+    });
+    res.send("Done");
+});
+
+app.post('/add-transaction', function(req, res){
+    dbWrapper.addTransaction(req.body);
+    res.send("Done");
 });
 
 app.listen(3000, function(){
