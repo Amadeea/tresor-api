@@ -1,16 +1,16 @@
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const crypto      = require('crypto');
-const DbWrapper   = require('./db');
+const Users       = require('./db/users');
 const app         = express();
 
-const dbWrapper   = new DbWrapper();
+const users   = new Users();
 
 app.use(bodyParser.urlencoded());
 
 app.post('/register', function(req, res){
     var password = crypto.createHash('md5').update(req.body.password).digest("hex");
-    dbWrapper.register(req.body.username, password);
+    users.register(req.body.username, password);
     res.send("Data successfully registered");
 });
 
