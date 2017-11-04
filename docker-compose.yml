@@ -1,0 +1,29 @@
+version: '3'
+services:
+  tresorDb:
+    image: 'mysql'
+    volumes:
+      - './dbs-data/mysql:/var/lib/mysql'
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=tresorDb
+      - MYSQL_USER=tresor
+      - MYSQL_PASSWORD=tresor123
+  tresorWeb:
+    image: 'node'
+    volumes:
+      - '.:/home/node/app'
+    ports:
+      - "3000:3000"
+    working_dir: "/home/node/app/"
+    depends_on:
+      - tresorDb 
+    stdin_open: true
+    tty: true
+  
+
+  

@@ -18,6 +18,10 @@ app.post('/login', function(req, res){
 
 });
 
+app.get('/lalala', function(req, res) {
+    res.send("Hallo lalala");
+});
+
 app.get('/get-transaction', function(req, res){
     dbWrapper.getTransaction(req.param('user_id'), function(error, data){
         for (var i = 0; i < data.length; i++) {
