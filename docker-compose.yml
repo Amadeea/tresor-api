@@ -1,18 +1,17 @@
 version: '3'
 services:
   tresorDb:
-    image: 'mysql'
+    image: 'postgres'
+    restart: 'always'
     volumes:
-      - './dbs-data/mysql:/var/lib/mysql'
-    expose:
-      - "3306"
+      - './dataDb:/var/lib/postgresql/'
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      - MYSQL_ROOT_PASSWORD=admin
-      - MYSQL_DATABASE=tresorDb
-      - MYSQL_USER=tresor
-      - MYSQL_PASSWORD=tresor123
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=tresor
+      - POSTGRES_USER=tresorDb
+      - POSTGRES_PASSWORD=tresor123
   tresorWeb:
     image: 'node'
     volumes:
