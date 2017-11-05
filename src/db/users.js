@@ -10,7 +10,7 @@ var User = db.define('users', {
 class DbUser {
     register(username, password){
         console.log(db)
-        db.sync().then(function() {
+        return db.sync().then(function() {
             return User.create({
               username: username,
               password: password

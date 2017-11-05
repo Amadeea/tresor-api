@@ -9,8 +9,8 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=tresor
-      - POSTGRES_USER=tresorDb
+      - POSTGRES_DB=tresorDb
+      - POSTGRES_USER=tresor
       - POSTGRES_PASSWORD=tresor123
   tresorWeb:
     image: 'node'

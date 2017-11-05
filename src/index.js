@@ -10,8 +10,10 @@ app.use(bodyParser.urlencoded());
 
 app.post('/register', function(req, res){
     var password = crypto.createHash('md5').update(req.body.password).digest("hex");
-    users.register(req.body.username, password);
-    res.send("Data successfully registered");
+    users.register(req.body.username, password)
+        .done( (result) => {
+            res.send("Data successfully registered");            
+        })
 });
 
 app.post('/login', function(req, res){
