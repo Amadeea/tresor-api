@@ -4,8 +4,7 @@ const Sequelize = require('sequelize')
 var User = db.define('users', {
   username: { type: Sequelize.STRING, primaryKey: true },
   password: Sequelize.STRING,
-  email: Sequelize.STRING,
-  createdAt: { type: Sequelize.DataTypes.DATE, defaultValue: Sequelize.NOW }
+  email: Sequelize.STRING
 });
 
 export function createUser(username, password, email) {

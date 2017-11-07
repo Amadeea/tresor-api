@@ -5,8 +5,6 @@ const app = express();
 
 import * as UserService from "./service/users"
 
-const users = new Users();
-
 app.use(bodyParser.urlencoded());
 
 app.post('/register', (req, res) => {
