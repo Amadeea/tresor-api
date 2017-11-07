@@ -2,25 +2,18 @@ const db = require('./db.js')
 const Sequelize = require('sequelize')
 
 var User = db.define('users', {
-    userId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    username: Sequelize.STRING,
-    password: Sequelize.STRING
+  username: { type: Sequelize.STRING, primaryKey: true },
+  password: Sequelize.STRING,
+  email: Sequelize.STRING,
+  createdAt: { type: Sequelize.DataTypes.DATE, defaultValue: Sequelize.NOW }
+});
+
+export function createUser(username, password, email) {
+  return db.sync().then(() => {
+    return User.create({
+      username: username,
+      password: password,
+      email: email
+    });
   });
-
-class DbUser {
-    register(username, password){
-        console.log(db)
-        return db.sync().then(function() {
-            return User.create({
-              username: username,
-              password: password
-          });
-        }).then(function(user) {
-            console.log(user.get({
-              plain: true
-            }));
-          });
-    }
 }
-
-module.exports = DbUser
