@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 import UserRouter from "./router/users"
+import * as error from "./error"
 
 app.use(bodyParser.urlencoded());
 
@@ -24,8 +25,8 @@ app.post('/add-transaction', function (req, res) {
 });
 
 app.use((err, req, res, next) => {
-    console.log(err.stack)
-    res.status(500).send("something broke")
+    console.log(err)
+    res.status(err.status).send(err.message)
 })
 
 app.listen(3000, function () {
