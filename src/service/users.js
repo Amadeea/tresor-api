@@ -21,6 +21,17 @@ export function register(userName, password, email) {
     })
 }
 
+export function login(userName, password) {
+    return UsersDb.getUser(userName).then(user => {
+        if (user == null || user.password != password){
+            throw new error.FieldError({
+                message:"username / password salah"
+            })
+        }
+        return "tokenabcd"
+    })
+}
+
 function checkPassword(password) {
     return new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d^a-zA-Z0-9].{5,50}$").test(password)
 }
