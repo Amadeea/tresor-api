@@ -26,7 +26,7 @@ app.post('/add-transaction', function (req, res) {
 
 app.use((err, req, res, next) => {
     console.log(err)
-    res.status(err.status).send(err.message)
+    res.status(err.status).send(err.body)
 })
 
 app.listen(3000, function () {
