@@ -15,7 +15,8 @@
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.1",
     "pg": "7.4.0",
-    "sequelize": "^4.8.4"
+    "sequelize": "^4.8.4",
+    "bcryptjs": "2.4.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

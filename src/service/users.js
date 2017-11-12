@@ -2,13 +2,20 @@ import * as UsersDb from "../db/users";
 import * as error from "../error";
 
 export function register(userName, password, email) {
-    if (!checkPassword(password)) {
-        throw new error.ParameterError("password", "Password harus terdiri dari minimal 8 karakter dan mengandung huruf besar, huruf kecil, dan anka")
-    }
-    return UsersDb.createUser(userName, password, email)
+    return UsersDb.getUser(userName).then(user => {
+        if (user != null) {
+            throw new error.ParameterError("userName", "Username sudah ada")
+        }
+    }).then(() => {
+        if (!checkPassword(password)) {
+            throw new error.ParameterError("password", "Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka")
+        }
+    }).then(() => {
+        return UsersDb.createUser(userName, password, email)
+    })
 }
 
 function checkPassword(password) {
-    return !!password.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$")
+    return new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d^a-zA-Z0-9].{5,50}$").test(password)
 }
 

@@ -16,3 +16,9 @@ export function createUser(username, password, email) {
     });
   });
 }
+
+export function getUser(username) {
+  return User.findOne({
+    where: {username: username}
+  })
+}
