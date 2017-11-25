@@ -15,12 +15,13 @@ function User(userId, userName, hash, email, createdAt, updatedAt) {
 export function getUser(userName) {
     return UserDb.getUser(userName)
     .then (userDb => {
-        createUserFromDb(userDb)
+        return createUserFromDb(userDb)
     })
 }
 
-function checkPassord(password) {
-    return bcrypt.compareSync(password, this.hash)
+export function checkPassord(password, hash) {
+    console.log(password, hash)
+    return bcrypt.compareSync(password, hash)
 }
 
 export function createNewUser(userName, password, email) {

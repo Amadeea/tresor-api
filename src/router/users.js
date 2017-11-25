@@ -15,7 +15,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.post('/auth/', (req, res, next) => {
-    UserService.login(req.body.username, req.body.password)
+    UserService.login(req.body.userName, req.body.password)
         .then(result => {
             res.status(200).send({
                 "x-access-token": result
