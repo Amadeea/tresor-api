@@ -1,4 +1,5 @@
 import * as UsersDb from "../db/users";
+import * as SessionRedis from "../redis/session"
 import * as error from "../error";
 
 export function register(userName, password, email) {
@@ -12,8 +13,8 @@ export function register(userName, password, email) {
     }).then(() => {
         if (!checkPassword(password)) {
             throw new error.FieldError({
-                field:"password", 
-                message:"Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka"
+                field: "password",
+                message: "Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka"
             })
         }
     }).then(() => {
@@ -23,12 +24,16 @@ export function register(userName, password, email) {
 
 export function login(userName, password) {
     return UsersDb.getUser(userName).then(user => {
-        if (user == null || user.password != password){
+        if (user == null || user.password != password) {
             throw new error.FieldError({
-                message:"username / password salah"
+                message: "username / password salah"
             })
         }
-        return "tokenabcd"
+        console.log("ZXCV")        
+        return user.userName
+    }).then(userName => {
+        console.log("ABCE")
+        return SessionRedis.createSession(userName)
     })
 }
 
