@@ -22,3 +22,9 @@ export function createTransaction(transactions) {
         });
     });
 }
+
+export function getTransactionList(userId) {
+    return db.sync().then(() => {
+        return Transaction.
+    })
+}

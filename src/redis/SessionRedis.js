@@ -2,7 +2,7 @@ import redisDriver from './driver.js'
 import uuidv4 from 'uuid/v4'
 import * as err from '../error'
 
-export function createSession(userId) {
+function createSession(userId) {
     const session = {
         userId: userId,
         createdAt: Date.now(),
@@ -13,7 +13,7 @@ export function createSession(userId) {
     return sessionId;
 }
 
-export function getSession(sessionId) {
+function getSession(sessionId) {
     return redisDriver
         .multi()
         .get("session:" + sessionId)
@@ -25,3 +25,10 @@ export function getSession(sessionId) {
             throw err.UnAuthorizedError("Token Tidak Ditemukan")
         })
 }
+
+const SessionRedis = {
+    createSession : createSession,
+    getSession : getSession
+}
+
+export default SessionRedis

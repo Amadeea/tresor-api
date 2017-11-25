@@ -13,12 +13,12 @@ export function Field(field, message) {
 }
 
 export function FieldError(fields) {
-  const that = Object.create(tresorError)
+  const that = Object.create(tresorError);
   that.status = 442;
   that.body = {
     fields: fields
-  }
-  return that
+  };
+  return that;
 }
 
 export function UnAuthorizedError(message) {
@@ -27,5 +27,14 @@ export function UnAuthorizedError(message) {
   that.body = {
     message: message
   };
-  return that
+  return that;
+}
+
+export function NotFoundError(message) {
+  const that = Object.create(tresorError);
+  that.status = 404;
+  that.body = {
+    message: message
+  };
+  return that;
 }

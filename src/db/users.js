@@ -8,20 +8,18 @@ var User = db.define('users', {
   email: Sequelize.STRING
 });
 
-export function createUser(userName, hash, email) {
+export function registerUser(registration) {
   return db.sync().then(() => { 
     return User.create({
-      userName: userName,
-      hash: hash,
-      email: email
+      userName: registration.userName,
+      hash: registration.hash,
+      email: registration.email
     });
   });
 }
 
-export function getUser(userName) {
+export function getUserByUserName(userName) {
   return User.findOne({
     where: { userName: userName }
-  }).catch(e => {
-    return null
   });
 }

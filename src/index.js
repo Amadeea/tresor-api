@@ -2,16 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-import UtilRouter from "./router/utils"
-import UserRouter from "./router/users"
-import TransactionRouter from "./router/transactions"
+import UtilsRouter from "./router/UtilsRouter"
+import UserRouter from "./router/UserRouter"
 import * as error from "./error"
 
 app.use(bodyParser.urlencoded());
 
-app.use('/', UtilRouter);
+app.use('/', UtilsRouter);
 app.use('/users', UserRouter);
-app.use('/transactions', TransactionRouter);
 
 app.use((err, req, res, next) => {
     console.log(err)

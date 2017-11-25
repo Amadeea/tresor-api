@@ -20,3 +20,7 @@ export function createTransaction(
         return Transaction.saveToDb(transaction)
     })
 }
+
+export function getTransactionList(userId) {
+    return Transaction.getTransactionList(userId)
+}
