@@ -42,9 +42,10 @@ export function login(userName, password) {
                 message: "username / password salah"
             });
         }
-        return user.userName;
-    }).then(userName => {
-        return SessionRedis.createSession(userName);
+
+        return user.userid;
+    }).then(userId => {
+        return SessionRedis.createSession(userId);
     })
 }
 

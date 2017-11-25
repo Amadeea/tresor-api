@@ -8,6 +8,17 @@ export function createSession(userId) {
         updatedAt: Date.now()
     };
     const sessionId = uuidv4();
-    redisDriver.set("session:" + sessionId, session.toString());
+    redisDriver.set("session:" + sessionId, JSON.stringify(session));
     return sessionId;
+}
+
+export function getSession(sessionId) {
+    return redisDriver
+        .multi()
+        .get("session:" + sessionId)
+        .execAsync()
+        .then(session => {
+            console.log(session)
+            return JSON.parse(session)
+        })
 }
