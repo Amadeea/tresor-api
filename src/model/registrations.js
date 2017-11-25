@@ -50,16 +50,17 @@ export function registerUser(registration) {
 export function verifyParams(registration) {
     return new Promise((resolve, reject) => {
         const errorFields = []
-        if (registration.userName === undefined) {
+        if (!registration.userName) {
             errorFields.push(error.Field("userName", "userName kosong"))
         } 
-        if (registration.password === undefined) {
+        if (!registration.password) {
             errorFields.push(error.Field("password", "password kosong"))
         } 
-        if (checkPassword(registration.password)) {
+        if (!checkPassword(registration.password)) {
             errorFields.push(error.Field("password", "Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka"))
         } 
-        if (!errorFields.length === 0) {
+        if (errorFields.length !== 0) {
+            console.log("error there")
             reject(error.FieldError(errorFields))
         } else {
             resolve(registration)
