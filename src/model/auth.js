@@ -49,3 +49,11 @@ export function verifyGetUserId(auth) {
 export function createSession(userId) {
     return SessionRedis.createSession(userId)
 }
+
+export function getUserId(sessionId) {
+    return SessionRedis
+    .getSession(sessionId)
+    .then(session => {
+        return session.userId
+    })
+}
