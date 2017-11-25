@@ -13,7 +13,7 @@ export function register(userName, password, email) {
         throw new error.FieldError({
             field: "password",
             message: "password tidak boleh kosong"
-        })
+        });
     }
     return UsersDb.getUser(userName).then(user => {
         if (user !== null) {
@@ -37,7 +37,7 @@ export function register(userName, password, email) {
 
 export function login(userName, password) {
     return UsersDb.getUser(userName).then(user => {
-        if (user == null || bcrypt.compareSync(password, user.password)) {
+        if (user === null || !bcrypt.compareSync(password, user.password)) {
             throw new error.FieldError({
                 message: "username / password salah"
             });

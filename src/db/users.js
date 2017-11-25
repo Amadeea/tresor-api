@@ -8,8 +8,7 @@ var User = db.define('users', {
 });
 
 export function createUser(username, password, email) {
-  console.log("username = ", username, "password = ", password)
-  return db.sync().then(() => {
+  return db.sync().then(() => { 
     return User.create({
       username: username,
       password: password,
