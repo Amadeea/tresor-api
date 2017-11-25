@@ -35,11 +35,7 @@ export function checkSession(sessionId) {
     if (sessionId === undefined) {
         throw error.UnAuthorizedError("Token kosong")
     }
-    return SessionRedis
-        .getSession(sessionId)
-        .then(session => {
-            return session.userId
-        })
+    return Auth.getUserId(sessionId)
 }
 
 function mapToApi(user) {
