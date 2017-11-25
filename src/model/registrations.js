@@ -21,13 +21,20 @@ export function create(userName, password, email) {
 }
 
 export function checkUserExist(registration) {
+    const userRegistered = "userRegistered"
     return User
     .getUser(registration.userName)
     .then(() => {
-        throw error.FieldError([].push(error.Field("userName", "userName sudah terdaftar")))
+        throw userRegistered
     })
-    .catch(() => {
-        return registration
+    .catch(err => {
+        if (err === userRegistered) {
+            const errorField = []
+            errorField.push(error.Field("userName", "userName sudah terdaftar"))
+            throw error.FieldError(errorField)
+        } else {
+            return registration
+        }
     })
 
 }

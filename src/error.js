@@ -15,7 +15,9 @@ export function Field(field, message) {
 export function FieldError(fields) {
   const that = Object.create(tresorError)
   that.status = 442;
-  that.body = fields;
+  that.body = {
+    fields: fields
+  }
   return that
 }
 

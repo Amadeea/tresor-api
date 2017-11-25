@@ -14,10 +14,10 @@ app.use('/users', UserRouter);
 app.get('/transactions', TransactionRouter);
 
 app.use((err, req, res, next) => {
+    console.log(err)
     if (err.status === undefined) {
         err.status = 500;
         err.body = "Unknown Error"
-        console.log(err)
     }
     res.status(err.status).send(err.body);
 })
