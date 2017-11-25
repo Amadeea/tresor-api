@@ -1,9 +1,9 @@
 import redisDriver from './driver.js'
 import uuidv4 from 'uuid/v4'
 
-export function createSession(userName) {
+export function createSession(userId) {
     const session = {
-        userName: userName,
+        userId: userId,
         createdAt: Date.now(),
         updatedAt: Date.now()
     };
