@@ -13,7 +13,7 @@ export function register(userName, password, email) {
         return Registrations.checkUserExist(registration)
     })
     .then( registration => {
-        return Registrations.createUser(registration)
+        return Registrations.registerUser(registration)
     })
 }
 

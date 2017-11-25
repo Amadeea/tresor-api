@@ -9,6 +9,7 @@ const router = express.Router()
 router.post('/', (req, res, next) => {
     UserService.register(req.body.userName, req.body.password, req.body.email)
         .then(result => {
+            console.log(result)
             res.status(201).send(result);
         })
         .catch(next);

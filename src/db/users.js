@@ -3,24 +3,24 @@ const Sequelize = require('sequelize')
 
 var User = db.define('users', {
   userId: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-  username: Sequelize.STRING,
+  userName: Sequelize.STRING,
   hash: Sequelize.STRING,
   email: Sequelize.STRING
 });
 
-export function createUser(username, hash, email) {
+export function createUser(userName, hash, email) {
   return db.sync().then(() => { 
     return User.create({
-      username: username,
+      userName: userName,
       hash: hash,
       email: email
     });
   });
 }
 
-export function getUser(username) {
+export function getUser(userName) {
   return User.findOne({
-    where: { username: username }
+    where: { userName: userName }
   }).catch(e => {
     return null
   });

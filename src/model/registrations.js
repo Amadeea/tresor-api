@@ -32,7 +32,7 @@ export function checkUserExist(registration) {
 
 }
 
-export function createUser(registration) {
+export function registerUser(registration) {
     return User.createNewUser(
         registration.userName,
         registration.password,

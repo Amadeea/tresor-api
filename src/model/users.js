@@ -1,12 +1,14 @@
 import * as UserDb from "../db/users"
 import bcrypt from "bcryptjs"
 
-function User(userId, userName, hash, email) {
+function User(userId, userName, hash, email, createdAt, updatedAt) {
     return {
         userId: userId,
         userName: userName,
         hash: hash,
-        email: email
+        email: email,
+        createdAt: createdAt,
+        updatedAt: updatedAt
     };
 }
 
@@ -34,6 +36,8 @@ function createUserFromDb(userDb) {
         userDb.userId,
         userDb.userName,
         userDb.hash,
-        userDb.email
+        userDb.email,
+        userDb.createdAt,
+        userDb.updatedAt
     )
 }
