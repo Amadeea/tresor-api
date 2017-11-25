@@ -12,7 +12,6 @@ var Transaction = db.define('transactions', {
 
 
 export function createTransaction(transactions) {
-    console.log("ABCDD")
     return db.sync().then(() => {
         return Transaction.create({
             userId: transactions.userId,

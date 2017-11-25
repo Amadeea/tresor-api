@@ -2,36 +2,15 @@ import * as UsersDb from "../db/users";
 import * as SessionRedis from "../redis/session"
 import * as error from "../error";
 import bcrypt from "bcryptjs"
+import Registration from "../model/registrations"
 
 export function register(userName, password, email) {
-    if (userName === undefined) {
-        throw new error.FieldError({
-            field: "userName",
-            message: "username tidak boleh kosong"
-        });
-    } else if (password === undefined) {
-        throw new error.FieldError({
-            field: "password",
-            message: "password tidak boleh kosong"
-        });
-    }
-    return UsersDb.getUser(userName).then(user => {
-        if (user !== null) {
-            throw new error.FieldError({
-                field: "username",
-                message: "User sudah terdaftar"
-            });
-        }
-    }).then(() => {
-        if (!checkPassword(password)) {
-            throw new error.FieldError({
-                field: "password",
-                message: "Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka"
-            });
-        }
-    }).then(() => {
-        const hash = bcrypt.hashSync(password, 10);
-        return UsersDb.createUser(userName, hash, email);
+    return Registration(userName, password, email)
+    .then( registration => {
+        return registration.verifyParams()
+    })
+    .then( registration => {
+        return registration.createUser()
     })
 }
 

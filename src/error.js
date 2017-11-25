@@ -5,6 +5,13 @@ const tresorError = {
   body: "Server Error"
 }
 
+export function Field(field, message) {
+  return {
+    field: field,
+    message: message
+  }
+}
+
 export function FieldError(fields) {
   const that = Object.create(tresorError)
   that.status = 442;

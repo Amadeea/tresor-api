@@ -4,15 +4,15 @@ const Sequelize = require('sequelize')
 var User = db.define('users', {
   userId: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
   username: Sequelize.STRING,
-  password: Sequelize.STRING,
+  hash: Sequelize.STRING,
   email: Sequelize.STRING
 });
 
-export function createUser(username, password, email) {
+export function createUser(username, hash, email) {
   return db.sync().then(() => { 
     return User.create({
       username: username,
-      password: password,
+      hash: hash,
       email: email
     });
   });
