@@ -26,9 +26,9 @@ function getSession(sessionId) {
         })
 }
 
-const SessionRedis = {
+const redis = {
     createSession : createSession,
     getSession : getSession
 }
 
-export default SessionRedis
+export default redis

@@ -10,9 +10,9 @@ function getUserByUserName(userName) {
 
 } 
 
-const UserService = {
+const services = {
     getUserByUserName: getUserByUserName,
     registerUser: UsersDb.registerUser
 }
 
-export default UserService
+export default services

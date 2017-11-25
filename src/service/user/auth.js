@@ -1,5 +1,4 @@
-import UserService from './UserService'
-import PasswordService from './PasswordService'
+import service from '../../service'
 import error from '../../error'
 
 function verifyInput(auth) {
@@ -17,14 +16,14 @@ function verifyInput(auth) {
     }
 }
 
-function auth(auth) {
-    return UserService
+function authorize(auth) {
+    return service.user.user
         .getUserByUserName(auth.userName)
         .catch(() => {
             throw error.UnAuthorizedError("userName atau password")
         })
         .then( user => {
-            if (PasswordService.verifyPassword(auth.password, user.hash)) {
+            if (service.user.password.verifyPassword(auth.password, user.hash)) {
                 return user.userId
             } else {
                 throw error.UnAuthorizedError("userName atau password")
@@ -32,9 +31,9 @@ function auth(auth) {
         })
 }
 
-const AuthService = {
+const auth = {
     verifyInput: verifyInput,
-    auth: auth
+    authorize: authorize
 }
 
-export default AuthService
+export default auth

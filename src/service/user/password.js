@@ -9,9 +9,9 @@ function verifyPassword(password, hash) {
     return bcrypt.compareSync(password, hash)
 }
 
-const PasswordService = {
+const service = {
     hashPassword: hashPassword,
     verifyPassword: verifyPassword
 }
 
-export default PasswordService
+export default service

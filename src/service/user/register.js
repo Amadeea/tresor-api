@@ -1,4 +1,4 @@
-import UserService from './UserService'
+import user from './user'
 import * as error from '../../error'
 
 function verifyInput(registration) {
@@ -25,7 +25,7 @@ function checkPassword(password) {
 
 function checkUserExist(registration) {
     console.log(registration)
-    return UserService
+    return user
         .getUserByUserName(registration.userName)
         .then(user => {
             if (user) {
@@ -45,9 +45,9 @@ function checkUserExist(registration) {
         });
 }
 
-const RegisterService = {
+const service = {
     verifyInput: verifyInput,
     checkUserExist: checkUserExist
 }
 
-export default RegisterService
+export default service
