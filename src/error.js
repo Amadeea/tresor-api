@@ -1,40 +1,47 @@
-
-
-const tresorError = {
-  status: 500,
-  body: "Server Error"
-}
-
-export function Field(field, message) {
+function tresorError() {
   return {
-    field: field,
-    message: message
+    status: 500,
+    body: "Server Error"
   }
 }
 
-export function FieldError(fields) {
-  const that = Object.create(tresorError);
-  that.status = 442;
-  that.body = {
-    fields: fields
-  };
-  return that;
+const error = {
+
+  UnprocessableEntity: {
+    Field: (field, message) => {
+      return {
+        field: field,
+        message: message
+      }
+    },
+    create: (fields) => {
+      console.log(this)
+      const that = Object.create(tresorError);
+      that.status = 442;
+      that.body = {
+        fields: fields
+      };
+      return that;
+    }
+  },
+
+  UnAuthorizedError: (message) => {
+    const that = Object.create(tresorError)
+    that.status = 401;
+    that.body = {
+      message: message
+    };
+    return that;
+  },
+
+  NotFoundError: (message) => {
+    const that = Object.create(tresorError);
+    that.status = 404;
+    that.body = {
+      message: message
+    };
+    return that;
+  }
 }
 
-export function UnAuthorizedError(message) {
-  const that = Object.create(tresorError)
-  that.status = 401;
-  that.body = {
-    message: message
-  };
-  return that;
-}
-
-export function NotFoundError(message) {
-  const that = Object.create(tresorError);
-  that.status = 404;
-  that.body = {
-    message: message
-  };
-  return that;
-}
+export default error;
