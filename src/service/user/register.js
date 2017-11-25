@@ -8,8 +8,7 @@ function verifyInput(registration) {
     }
     if (!registration.password) {
         errorFields.push(error.UnprocessableEntity.Field("password", "password kosong"));
-    }
-    if (!checkPassword(registration.password)) {
+    } else if (!checkPassword(registration.password)) {
         errorFields.push(error.UnprocessableEntity.Field("password", "Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka"));
     }
     if (errorFields.length !== 0) {
