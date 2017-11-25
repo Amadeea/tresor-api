@@ -4,8 +4,8 @@ export default function authMiddleware(req, res, next) {
     Promise
         .resolve(req.get('x-access-token'))
         .then(service.user.session.getSession)
-        .then(userId => {
-            req.userId = userId
+        .then(session => {
+            req.body.userId = session.userId
             next()
         })
         .catch(err => {
