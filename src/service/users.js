@@ -2,15 +2,18 @@ import * as UsersDb from "../db/users";
 import * as SessionRedis from "../redis/session"
 import * as error from "../error";
 import bcrypt from "bcryptjs"
-import Registration from "../model/registrations"
+import * as Registrations from "../model/registrations"
 
 export function register(userName, password, email) {
-    return Registration(userName, password, email)
+    return Registrations.create(userName, password, email)
     .then( registration => {
-        return registration.verifyParams()
+        return Registrations.verifyParams(registration)
     })
     .then( registration => {
-        return registration.createUser()
+        return Registrations.checkUserExist(registration)
+    })
+    .then( registration => {
+        return Registrations.createUser(registration)
     })
 }
 

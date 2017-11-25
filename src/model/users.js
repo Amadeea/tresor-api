@@ -1,14 +1,20 @@
 import * as UserDb from "../db/users"
+import bcrypt from "bcryptjs"
 
 function User(userId, userName, hash, email) {
     return {
         userId: userId,
         userName: userName,
         hash: hash,
-        email: email,
-        checkPassord: checkPassord,
-        verifyParams: verifyParams
+        email: email
     };
+}
+
+export function getUser(userName) {
+    return UserDb.getUser(userName)
+    .then (userDb => {
+        createUserFromDb(userDb)
+    })
 }
 
 function checkPassord(password) {
