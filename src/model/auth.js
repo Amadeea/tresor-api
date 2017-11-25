@@ -30,7 +30,6 @@ export function verifyInput(auth) {
             errorFields.push(error.Field("password", "password kosong"))
         } 
         if (errorFields.length !== 0) {
-            console.log("error there")
             reject(error.FieldError(errorFields))
         } else {
             resolve(auth)

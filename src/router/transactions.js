@@ -5,17 +5,17 @@ import Transaction from "../model/transactions"
 
 const router = express.Router()
 router.post('/', authMiddleware, (req, res, next) => {
-    const transactions = Transaction(
+    TransactionService.createTransaction(
         req.userId,
         req.body.info,
         req.body.amount,
         req.body.hashtag,
         req.body.type
-    )    
-    TransactionService.createTransaction(transactions)
-    .then(() => {
-        res.status(200).send({})
+    )
+    .then((transaction) => {
+        res.status(200).send(transaction)
     })
+    .catch(next)
 })
 
 export default router;

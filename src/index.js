@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded());
 
 app.use('/', UtilRouter);
 app.use('/users', UserRouter);
-app.get('/transactions', TransactionRouter);
+app.use('/transactions', TransactionRouter);
 
 app.use((err, req, res, next) => {
     console.log(err)

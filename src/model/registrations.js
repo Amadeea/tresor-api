@@ -60,7 +60,6 @@ export function verifyParams(registration) {
             errorFields.push(error.Field("password", "Password harus terdiri dari minimal 6 karakter dan mengandung huruf besar, huruf kecil, dan angka"))
         } 
         if (errorFields.length !== 0) {
-            console.log("error there")
             reject(error.FieldError(errorFields))
         } else {
             resolve(registration)

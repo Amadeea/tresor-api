@@ -20,7 +20,6 @@ export function getUser(userName) {
 }
 
 export function checkPassord(password, hash) {
-    console.log(password, hash)
     return bcrypt.compareSync(password, hash)
 }
 
