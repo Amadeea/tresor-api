@@ -13,7 +13,6 @@ app.get('/get-transaction', function (req, res) {
     dbWrapper.getTransaction(req.param('user_id'), function (error, data) {
         for (var i = 0; i < data.length; i++) {
             var row = data[i];
-            console.log(row);
         }
     });
     res.send("Done");
@@ -25,8 +24,12 @@ app.post('/add-transaction', function (req, res) {
 });
 
 app.use((err, req, res, next) => {
-    console.log(err)
-    res.status(err.status).send(err.body)
+    if (err.status === undefined) {
+        err.status = 500;
+        err.body = "Unknown Error"
+        console.log(err)
+    }
+    res.status(err.status).send(err.body);
 })
 
 app.listen(3000, function () {

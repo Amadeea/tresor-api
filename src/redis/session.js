@@ -6,10 +6,8 @@ export function createSession(userName) {
         userName: userName,
         createdAt: Date.now(),
         updatedAt: Date.now()
-    }
-    console.log(session)
-    const sessionId = uuidv4()
-    console.log(sessionId)
-    redisDriver.set("session:" + sessionId, session.toString())
-    return sessionId
+    };
+    const sessionId = uuidv4();
+    redisDriver.set("session:" + sessionId, session.toString());
+    return sessionId;
 }

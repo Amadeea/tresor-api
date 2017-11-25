@@ -8,6 +8,7 @@ var User = db.define('users', {
 });
 
 export function createUser(username, password, email) {
+  console.log("username = ", username, "password = ", password)
   return db.sync().then(() => {
     return User.create({
       username: username,
@@ -19,6 +20,6 @@ export function createUser(username, password, email) {
 
 export function getUser(username) {
   return User.findOne({
-    where: {username: username}
-  })
+    where: { username: username }
+  });
 }
