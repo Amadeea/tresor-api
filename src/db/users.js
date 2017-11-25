@@ -2,7 +2,7 @@ const db = require('./db.js')
 const Sequelize = require('sequelize')
 
 var User = db.define('users', {
-  userid: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  userId: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
   username: Sequelize.STRING,
   password: Sequelize.STRING,
   email: Sequelize.STRING

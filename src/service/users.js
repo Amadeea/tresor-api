@@ -43,7 +43,7 @@ export function login(userName, password) {
             });
         }
 
-        return user.userid;
+        return user.userId;
     }).then(userId => {
         return SessionRedis.createSession(userId);
     })
