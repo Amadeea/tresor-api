@@ -18,7 +18,6 @@ export function getSession(sessionId) {
         .get("session:" + sessionId)
         .execAsync()
         .then(session => {
-            console.log(session)
             return JSON.parse(session)
         })
 }

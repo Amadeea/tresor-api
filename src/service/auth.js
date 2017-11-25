@@ -6,4 +6,7 @@ export function checkSession(sessionId) {
     }
     return SessionRedis
         .getSession(sessionId)
+        .then(session => {
+            return session.userId
+        })
 }

@@ -6,10 +6,9 @@ export function authMiddleware(req, res, next) {
     const sessionId = req.get('x-access-token')
     AuthService
         .checkSession(sessionId)
-        .then(() => {
-            res.status(200).send({
-                time: Date.now()
-            })
+        .then(userId => {
+            req.userId = userId
+            next()
         })
         .catch(err => {
             next(err)
