@@ -15,6 +15,7 @@ export function register(userName, password, email) {
     .then( registration => {
         return Registrations.registerUser(registration)
     })
+    .then(mapToApi)
 }
 
 export function login(userName, password) {
@@ -35,3 +36,12 @@ function checkPassword(password) {
     return new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d^a-zA-Z0-9].{5,50}$").test(password);
 }
 
+function mapToApi(user) {
+    return {
+        userId: user.userId,
+        userName: user.userName,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+    }
+}
