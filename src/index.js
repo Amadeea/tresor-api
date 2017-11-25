@@ -4,25 +4,14 @@ const app = express();
 
 import UtilRouter from "./router/utils"
 import UserRouter from "./router/users"
+import TransactionRouter from "./router/transactions"
 import * as error from "./error"
 
 app.use(bodyParser.urlencoded());
 
-app.use('/', UtilRouter)
-app.use('/users', UserRouter)
-app.get('/get-transaction', function (req, res) {
-    dbWrapper.getTransaction(req.param('user_id'), function (error, data) {
-        for (var i = 0; i < data.length; i++) {
-            var row = data[i];
-        }
-    });
-    res.send("Done");
-});
-
-app.post('/add-transaction', function (req, res) {
-    dbWrapper.addTransaction(req.body);
-    res.send("Done");
-});
+app.use('/', UtilRouter);
+app.use('/users', UserRouter);
+app.get('/transactions', TransactionRouter);
 
 app.use((err, req, res, next) => {
     if (err.status === undefined) {
