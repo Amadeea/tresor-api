@@ -10,8 +10,7 @@ var Transaction = db.define('transactions', {
     type: Sequelize.STRING
 });
 
-
-export function createTransaction(transactions) {
+function createTransaction(transactions) {
     return db.sync().then(() => {
         return Transaction.create({
             userId: transactions.userId,
@@ -23,8 +22,8 @@ export function createTransaction(transactions) {
     });
 }
 
-export function getTransactionList(userId) {
-    return db.sync().then(() => {
-        return Transaction.
-    })
+const transaction = {
+    createTransaction : createTransaction
 }
+
+export default transaction;

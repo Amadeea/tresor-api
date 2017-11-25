@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded());
 
 app.use('/', router.util);
 app.use('/users', router.user);
+app.use('/transactions', router.transaction)
 
 app.use((err, req, res, next) => {
     console.log(err)
