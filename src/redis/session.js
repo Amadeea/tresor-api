@@ -1,5 +1,6 @@
 import redisDriver from './driver.js'
 import uuidv4 from 'uuid/v4'
+import * as err from '../error'
 
 export function createSession(userId) {
     const session = {
@@ -19,5 +20,8 @@ export function getSession(sessionId) {
         .execAsync()
         .then(session => {
             return JSON.parse(session)
+        })
+        .catch(() => {
+            throw err.UnAuthorizedError("Token Tidak Ditemukan")
         })
 }
