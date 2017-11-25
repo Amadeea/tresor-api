@@ -1,8 +1,8 @@
-import * as UsersDb from "../../db/users";
+import db from "../../db";
 import * as error from "../../error";
 
 function getUserByUserName(userName) {
-    return UsersDb
+    return db.user
         .getUserByUserName(userName)
         .catch(() => {
             throw error.NotFoundError("user not found");
@@ -12,7 +12,7 @@ function getUserByUserName(userName) {
 
 const services = {
     getUserByUserName: getUserByUserName,
-    registerUser: UsersDb.registerUser
+    registerUser: db.user.registerUser
 }
 
 export default services

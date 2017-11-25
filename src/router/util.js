@@ -1,4 +1,4 @@
-import middleware from '../middleware/middlewares'
+import middleware from '../middleware'
 import api from '../api/'
 import express from 'express';
 
