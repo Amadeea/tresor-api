@@ -8,6 +8,7 @@ const user = {
             .then(service.user.register.checkUserExist)
             .then(service.user.password.hashPassword)
             .then(service.user.user.registerUser)
+            .then(service.user.user.mapUser)
             .then(result => {
                 res.status(201).send(result);
             })
