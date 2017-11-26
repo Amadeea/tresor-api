@@ -1,4 +1,6 @@
 import _ from  'lodash'
+import db from '../../db'
+import error from '../../error'
 
 function mapTransaction(transactionModel) {
     return {
@@ -20,7 +22,32 @@ function mapTransactionList(listTransactionModel) {
     }
 }
 
+function querySingle(query) {
+    console.log(query)
+    return db.transaction
+        .querySingle(query)
+        .then(transaction => {
+            if (transaction[0]) {
+                return transaction[0]
+            } else {
+                throw error.NotFoundError("transaksi tidak ditemukan")
+            }
+        })
+    
+}
+
+function queryList(query) {
+    const transactionList = db.transaction.queryList(query);
+    if (transactionList) {
+        return transaction
+    } else {
+        throw error.NotFoundError("list transaksi tidak ditemukan")
+    }
+}
+
 const transaction = {
+    querySingle: querySingle,
+    queryList: queryList,
     mapTransactionList: mapTransactionList,
     mapTransaction: mapTransaction
 }

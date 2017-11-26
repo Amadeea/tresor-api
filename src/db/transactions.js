@@ -32,9 +32,21 @@ function queryList(query) {
     });
 }
 
+function querySingle(query) {
+    return db.sync().then(() => {
+        return Transaction.findAll({
+            where: {
+                transactionId: query.transactionId,
+                userId: query.userId
+            }
+        });
+    })
+}
+
 const transaction = {
     createTransaction: createTransaction,
-    queryList: queryList
+    queryList: queryList,
+    querySingle: querySingle
 }
 
 export default transaction;
