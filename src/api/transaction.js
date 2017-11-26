@@ -2,6 +2,7 @@ import service from '../service'
 
 const transaction = {
     create: (req, res, next) => {
+        req.body.userId = req.userId;
         Promise
             .resolve(req.body)
             .then(service.transaction.create.verifyInput)
@@ -9,8 +10,7 @@ const transaction = {
             .then(transaction => {
                 res.status(201).send(transaction)
             })
-            .catch(next)
-        
+            .catch(next);
     }
 }
 export default transaction;
