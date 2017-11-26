@@ -22,8 +22,19 @@ function createTransaction(transactions) {
     });
 }
 
+function queryList(query) {
+    return db.sync().then(() => {
+        return Transaction.findAll({
+            where: {
+                userId: query.userId
+            }
+        });
+    });
+}
+
 const transaction = {
-    createTransaction : createTransaction
+    createTransaction: createTransaction,
+    queryList: queryList
 }
 
 export default transaction;
