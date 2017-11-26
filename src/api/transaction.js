@@ -17,9 +17,10 @@ const transaction = {
         Promise
             .resolve(req.query)
             .then(service.transaction.getList.queryList)
+            .then(service.transaction.transaction.mapTransactionList)
             .then(transaction => {
-                console.log(transaction);
-                res.status(200).send();
+                console.log(transaction)
+                res.status(200).send(transaction);
             })
             .catch(next);
     }
