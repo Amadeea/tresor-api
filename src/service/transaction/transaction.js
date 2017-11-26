@@ -37,12 +37,16 @@ function querySingle(query) {
 }
 
 function queryList(query) {
-    const transactionList = db.transaction.queryList(query);
-    if (transactionList) {
-        return transaction
-    } else {
-        throw error.NotFoundError("list transaksi tidak ditemukan")
-    }
+    return db.transaction
+        .queryList(query)
+        .then(transactionList => {
+            console.log(transactionList);
+            if (transactionList) {
+                return transactionList
+            } else {
+                throw error.NotFoundError("list transaksi tidak ditemukan")
+            }
+        })
 }
 
 const transaction = {
