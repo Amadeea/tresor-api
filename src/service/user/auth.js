@@ -4,13 +4,13 @@ import error from '../../error'
 function verifyInput(auth) {
     const errorFields = []
     if (!auth.userName) {
-        errorFields.push(error.Field("userName", "userName kosong"))
+        errorFields.push(error.UnprocessableEntity.Field("userName", "userName kosong"))
     }
     if (!auth.password) {
-        errorFields.push(error.Field("password", "password kosong"))
+        errorFields.push(error.UnprocessableEntity.Field("password", "password kosong"))
     }
     if (errorFields.length !== 0) {
-        throw error.FieldError(errorFields)
+        throw error.UnprocessableEntity.create(errorFields)
     } else {
         return auth
     }

@@ -1,5 +1,6 @@
-const db = require('./db.js')
-const Sequelize = require('sequelize')
+const db = require('./db.js');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 var Transaction = db.define('transactions', {
     transactionId: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
@@ -24,10 +25,14 @@ function createTransaction(transactions) {
 
 function queryList(query) {
     return db.sync().then(() => {
+        const where = {
+            userId: query.userId
+        }
+        if (query.hashtag) {
+            where.hashtag = query.hashtag;
+        }
         return Transaction.findAll({
-            where: {
-                userId: query.userId
-            }
+            where: where
         });
     });
 }
